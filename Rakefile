@@ -1,7 +1,12 @@
-require 'albacore'
-build :msbuild do |b|
-  b.properties = { :configuration => :Debug }
-  b.target = [ 'Clean', 'Build' ]
-  b.file = "WillsDemoCFTemplate.sln"
-  b.logging = 'detailed'
+#!/usr/bin/env ruby
+
+require 'rake/testtask'
+require 'rubygems'
+require 'rake'
+require 'haml'
+
+task default: :clean
+
+task :clean do
+  FileUtils.rm_r(Dir.glob("./*.html"), force: true)
 end
