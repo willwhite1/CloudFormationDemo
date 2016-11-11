@@ -7,7 +7,6 @@
     "KeyName" : {
       "Description" : "Name of an existing EC2 KeyPair",
       "Type" : "AWS::EC2::KeyPair::KeyName",
-      "Default" : "WillsProvisioningKey-Ohio",
       "ConstraintDescription" : "must be the name of an existing EC2 KeyPair."
     },
 
@@ -68,7 +67,7 @@
     },
     "AWSRegion2AMI" : {
       "us-east-1"        : {"Windows2008r2" : "ami-7d7f026a", "Windows2012r2" : "ami-ee7805f9"},
-	  "us-east-2"        : {"Windows2008r2" : "ami-7d7f026a", "Windows2012r2" : "ami-de164cbb", "2016withSqlExpress" : "ami-9c3e64f9"},
+	  "us-east-2"        : {"Windows2008r2" : "ami-7d7f026a", "Windows2012r2" : "ami-de164cbb", "2016withSqlExpress" : "ami-9c3e64f9", "Windows2016Full" : "ami-e03b6185"},
       "us-west-2"        : {"Windows2008r2" : "ami-8505d7e5", "Windows2012r2" : "ami-2827f548"},
       "us-west-1"        : {"Windows2008r2" : "ami-576c2337", "Windows2012r2" : "ami-c06b24a0"},
       "eu-west-1"        : {"Windows2008r2" : "ami-ea84fd99", "Windows2012r2" : "ami-9b81f8e8"},
@@ -614,7 +613,7 @@
       
       "Properties": {
         "InstanceType" : { "Ref" : "PublicWebInstanceType" },
-        "ImageId" : { "Fn::FindInMap" : [ "AWSRegion2AMI", { "Ref" : "AWS::Region" }, "Windows2012r2" ]},
+        "ImageId" : { "Fn::FindInMap" : [ "AWSRegion2AMI", { "Ref" : "AWS::Region" }, "Windows2016Full" ]},
         "KeyName" : { "Ref" : "KeyName" },
 		"IamInstanceProfile" : {"Ref" : "PublicWebInstanceIamProfile"},
 		"Tags" : [{"Key" : "WillsDemo-Role", "Value" : "PublicWebServer"}],
@@ -665,7 +664,7 @@
       
       "Properties": {
         "InstanceType" : { "Ref" : "PrivateWebInstanceType" },
-        "ImageId" : { "Fn::FindInMap" : [ "AWSRegion2AMI", { "Ref" : "AWS::Region" }, "Windows2012r2" ]},
+        "ImageId" : { "Fn::FindInMap" : [ "AWSRegion2AMI", { "Ref" : "AWS::Region" }, "Windows2016Full" ]},
         "KeyName" : { "Ref" : "KeyName" },
 		"IamInstanceProfile" : {"Ref" : "PrivateWebInstanceIamProfile"},
 		"Tags" : [{"Key" : "WillsDemo-Role", "Value" : "PrivateWebServer"}],
@@ -716,7 +715,7 @@
       
       "Properties": {
         "InstanceType" : { "Ref" : "AppInstanceType" },
-        "ImageId" : { "Fn::FindInMap" : [ "AWSRegion2AMI", { "Ref" : "AWS::Region" }, "Windows2012r2" ]},
+        "ImageId" : { "Fn::FindInMap" : [ "AWSRegion2AMI", { "Ref" : "AWS::Region" }, "Windows2016Full" ]},
         "KeyName" : { "Ref" : "KeyName" },
 		"IamInstanceProfile" : {"Ref" : "AppInstanceIamProfile"},
 		"Tags" : [{"Key" : "WillsDemo-Role", "Value" : "AppServer"}],
