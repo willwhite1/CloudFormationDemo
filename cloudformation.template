@@ -565,6 +565,20 @@
           "CidrIp" : { "Ref" : "RdpLocation" }
         } ]
       }
+    },
+
+	"HttpInboundSecurityGroup" : {
+      "Type" : "AWS::EC2::SecurityGroup",
+      "Properties" : {
+        "GroupDescription" : "Enable http access to the EC2 host",
+        "VpcId" : { "Ref" : "VPC" },
+        "SecurityGroupIngress" : [ { 
+          "IpProtocol" : "tcp",
+          "FromPort" : "80",  
+          "ToPort" : "80",
+          "CidrIp" : "0.0.0.0/0"
+        } ]
+      }
     },	
 
 	"PublicWebInstanceIamProfile" : {
@@ -621,7 +635,7 @@
 		"NetworkInterfaces": [ {
 		  "AssociatePublicIpAddress": "true",
 		  "DeviceIndex": "0",
-		  "GroupSet": [{ "Ref" : "RdpInboundSecurityGroup" }],
+		  "GroupSet": [{ "Ref" : "RdpInboundSecurityGroup" }, { "Ref" : "HttpInboundSecurityGroup" }],
 		  "SubnetId": { "Ref" : "PublicWebSubnet" }
 		} ],
        "UserData" : { "Fn::Base64" : { "Fn::Join" : ["", [
